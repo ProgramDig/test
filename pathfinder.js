@@ -151,27 +151,3 @@ class GeneticAlgorithm {
 //     L.polyline(latLngs, {color: 'blue'}).addTo(map);
 // });
 
-L.Routing.control({
-    waypoints: [
-        L.latLng(55.54, 11.94),
-        L.latLng(55.5792, 11.949)
-    ],
-    waypointNameFallback: function(latLng) {
-        function zeroPad(n) {
-            n = Math.round(n);
-            return n < 10 ? '0' + n : n;
-        }
-        function sexagesimal(p, pos, neg) {
-            var n = Math.abs(p),
-                degs = Math.floor(n),
-                mins = (n - degs) * 60,
-                secs = (mins - Math.floor(mins)) * 60,
-                frac = Math.round((secs - Math.floor(secs)) * 100);
-            return (n >= 0 ? pos : neg) + degs + '°' +
-                zeroPad(mins) + '\'' +
-                zeroPad(secs) + '.' + zeroPad(frac) + '"';
-        }
-
-        return sexagesimal(latLng.lat, 'N', 'S') + ' ' + sexagesimal(latLng.lng, 'E', 'W');
-    }
-}).addTo(map);
